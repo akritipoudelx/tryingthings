@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulatory Compliance Study Tool</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Regulatory Compliance Study Tool</h1>
+    <p class="subtitle">Flashcards · Quiz · Glossary · Progress</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="flashcards" role="tab" aria-selected="true">Flashcards</button>
+    <button class="tab" data-tab="quiz" role="tab" aria-selected="false">Quiz</button>
+    <button class="tab" data-tab="glossary" role="tab" aria-selected="false">Glossary</button>
+    <button class="tab" data-tab="progress" role="tab" aria-selected="false">Progress</button>
+  </nav>
+
+  <main>
+    <!-- FLASHCARDS -->
+    <section id="flashcards" class="panel active" role="tabpanel">
+      <div class="panel-header">
+        <h2>Flashcards</h2>
+        <div class="counter"><span id="fc-position">0 / 0</span></div>
+      </div>
+
+      <div class="controls">
+        <label for="fc-category">Category</label>
+        <select id="fc-category"></select>
+        <button id="fc-shuffle" class="btn">Shuffle</button>
+        <label class="check">
+          <input type="checkbox" id="fc-only-review">
+          Review only
+        </label>
+      </div>
+
+      <div class="flashcard-stage">
+        <div id="flashcard" class="flashcard" tabindex="0" aria-label="Flashcard. Press space to flip.">
+          <div class="card-face card-front">
+            <span class="card-label">Term</span>
+            <div class="card-text" id="fc-front-text">Loading…</div>
+            <span class="card-category" id="fc-front-cat"></span>
+          </div>
+          <div class="card-face card-back">
+            <span class="card-label">Definition</span>
+            <div class="card-text" id="fc-back-text"></div>
+            <span class="card-category" id="fc-back-cat"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="fc-prev" class="btn">&larr; Prev</button>
+        <button id="fc-flip" class="btn">Flip</button>
+        <button id="fc-next" class="btn">Next &rarr;</button>
+      </div>
+
+      <div class="actions">
+        <button id="fc-review" class="btn outline">Need review</button>
+        <button id="fc-know" class="btn outline">I know this</button>
+      </div>
+
+      <p class="hint">Keys: ← / → to navigate, space to flip, K = know, R = review.</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="panel" role="tabpanel">
+      <div class="panel-header">
+        <h2>Quiz</h2>
+        <div class="counter"><span id="quiz-counter">—</span></div>
+      </div>
+
+      <div id="quiz-start" class="quiz-start">
+        <p>10 randomized multiple-choice questions, mixing term &rarr; definition and definition &rarr; term.</p>
+        <div class="controls">
+          <label for="quiz-category">Category</label>
+          <select id="quiz-category"></select>
+          <button id="quiz-begin" class="btn primary">Start quiz</button>
+        </div>
+      </div>
+
+      <div id="quiz-stage" class="quiz-stage hidden">
+        <div class="question-prompt" id="quiz-prompt-label">Question</div>
+        <div class="question-text" id="quiz-question">—</div>
+        <ol class="choices" id="quiz-choices"></ol>
+        <div class="actions">
+          <button id="quiz-submit" class="btn primary" disabled>Submit</button>
+          <button id="quiz-next" class="btn hidden">Next</button>
+        </div>
+        <div id="quiz-feedback" class="feedback"></div>
+      </div>
+
+      <div id="quiz-results" class="quiz-results hidden">
+        <h3>Results</h3>
+        <p class="score" id="quiz-score">—</p>
+        <ul id="quiz-review-list" class="review-list"></ul>
+        <div class="actions">
+          <button id="quiz-restart" class="btn primary">New quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section id="glossary" class="panel" role="tabpanel">
+      <div class="panel-header">
+        <h2>Glossary</h2>
+        <div class="counter"><span id="gl-count">0</span> terms</div>
+      </div>
+
+      <div class="controls">
+        <input type="search" id="gl-search" placeholder="Search terms or definitions…" aria-label="Search">
+        <select id="gl-category"></select>
+      </div>
+
+      <ul id="gl-list" class="glossary-list" aria-live="polite"></ul>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress" class="panel" role="tabpanel">
+      <div class="panel-header">
+        <h2>Progress</h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Studied</span>
+          <span class="stat-value" id="stat-studied">0</span>
+          <span class="stat-meta" id="stat-studied-meta">of 0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Mastered</span>
+          <span class="stat-value" id="stat-mastered">0</span>
+          <span class="stat-meta" id="stat-mastered-meta">of 0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Quiz accuracy</span>
+          <span class="stat-value" id="stat-accuracy">—</span>
+          <span class="stat-meta" id="stat-accuracy-meta">0 answered</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Quizzes taken</span>
+          <span class="stat-value" id="stat-quizzes">0</span>
+          <span class="stat-meta" id="stat-quizzes-meta">best: —</span>
+        </div>
+      </div>
+
+      <h3 class="section-heading">Needs review</h3>
+      <ul id="review-list" class="review-list"></ul>
+
+      <h3 class="section-heading">Mastered</h3>
+      <ul id="mastered-list" class="review-list compact"></ul>
+
+      <div class="actions">
+        <button id="reset-progress" class="btn outline">Reset progress</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>Local-only. Progress saved in this browser via localStorage.</small>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
