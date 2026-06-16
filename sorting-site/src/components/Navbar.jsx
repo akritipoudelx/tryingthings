@@ -15,16 +15,16 @@ export default function Navbar() {
               <div className="nav-links-wrapper">
                 <div className="nav-links-flex">
                   <Link to="/company" className="single-nav-link w-inline-block">
-                    <div>Agent</div>
+                    <div>Identify</div>
                   </Link>
                   <Link to="/platform" className={"single-nav-link w-inline-block" + (location.pathname === '/platform' ? ' w--current' : '')}>
-                    <div>Rich</div>
+                    <div>Enrich</div>
                   </Link>
                   <Link to="/services" className={"single-nav-link w-inline-block" + (location.pathname === '/services' ? ' w--current' : '')}>
                     <div>Ground</div>
                   </Link>
                   <Link to="/suppliers" className={"single-nav-link w-inline-block" + (location.pathname === '/suppliers' ? ' w--current' : '')}>
-                    <div>S</div>
+                    <div>Compute</div>
                   </Link>
                 </div>
               </div>
