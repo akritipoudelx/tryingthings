@@ -34,9 +34,10 @@ export default function Home() {
 
       // True infinite looping carousel — clones cards so stage 1 flows after stage 5
       const track = document.querySelector('.loop-carousel-track');
-      const realStages = Array.from(document.querySelectorAll('.loop-stage'));
-      const dots = document.querySelectorAll('.loop-dot');
-      if (track && realStages.length) {
+      if (track && !track.dataset.initialized) {
+        track.dataset.initialized = '1';
+        const realStages = Array.from(track.querySelectorAll('.loop-stage'));
+        const dots = document.querySelectorAll('.loop-dot');
         const N = realStages.length;
         const CARD_W = 280, GAP = 16;
 
@@ -74,7 +75,6 @@ export default function Home() {
         setInterval(() => {
           const next = current + 1;
           goTo(next);
-          // After animating to a clone, instantly reset to real equivalent
           if (next >= N) {
             setTimeout(() => goTo(next - N, true), 660);
           }
