@@ -1,9 +1,7 @@
 /* ─────────────────────────────────────────────────────────
    SORTING BRAND — custom.css
-   Brand colors applied over Webflow base
    ───────────────────────────────────────────────────────── */
 
-/* Brand tokens */
 :root {
   --ink:          #14150E;
   --ink-soft:     #2E2F26;
@@ -20,7 +18,6 @@
   --amber:        #D38B2A;
   --white:        #FFFFFF;
 
-  /* orbit/terminal palette */
   --term-bg:      #0d1117;
   --term-bg-2:    #161b22;
   --term-border:  #1f2630;
@@ -35,51 +32,8 @@
   --font-mono:    "SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
 }
 
-/* ── Global background / text ── */
-.page-wrapper { background: var(--ground); }
-
-/* ── ORBIT CANVAS STYLES ── */
-.canvas {
-  position: relative; width: 100%; height: 100%;
-  min-height: 640px; overflow: hidden; background: transparent;
-  font-family: var(--font-mono); touch-action: none;
-}
-.card {
-  position: absolute; left: 0; top: 0; width: 224px; opacity: 0;
-  cursor: grab; user-select: none; -webkit-user-select: none;
-  touch-action: none; border-radius: 12px;
-  transition: box-shadow 0.18s ease;
-  will-change: transform, opacity; transform-origin: top left;
-}
-.card:active, .card.dragging { cursor: grabbing; }
-.card.dragging { box-shadow: 0 30px 70px -20px rgba(0,0,0,0.75) !important; }
-.card.snapping {
-  transition: transform 0.65s cubic-bezier(0.34,1.56,0.64,1),
-              opacity 0.3s ease, box-shadow 0.18s ease !important;
-}
-.stage-pill {
-  position: absolute; top: -13px; left: 14px;
-  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--text-dim);
-  background: var(--term-bg-2); border: 1px solid var(--term-border);
-  border-radius: 20px; padding: 2px 10px; pointer-events: none;
-  white-space: nowrap; z-index: 2;
-}
-.tile { background: var(--term-bg); border: 1px solid #2a3d50; box-shadow: 0 18px 45px -22px rgba(0,0,0,0.7); overflow: visible; }
-.tile video { display: block; width: 100%; height: 136px; object-fit: cover; pointer-events: none; background: var(--term-bg-2); border-radius: 12px 12px 0 0; overflow: hidden; }
-.tile .label { padding: 7px 12px; font-size: 13px; color: var(--text-dim); background: var(--term-bg-2); border-top: 1px solid var(--term-border); letter-spacing: 0.03em; }
-.term-view { display: block; width: 100%; height: 136px; background: var(--term-bg); overflow: hidden; padding: 10px 12px; border-radius: 12px 12px 0 0; }
-.term-body { font-size: 9.5px; line-height: 1.55; color: var(--text-default); height: 100%; overflow: hidden; white-space: pre-wrap; word-break: break-word; }
-.prompt  { color: var(--text-prompt); }
-.cmd     { color: var(--text-cmd); }
-.dim     { color: var(--text-dim); }
-.accent  { color: var(--text-accent); }
-.success { color: var(--text-success); }
-.warn    { color: var(--text-warn); }
-.bar-track { color: var(--text-dim); }
-.bar-fill  { color: var(--text-bar); }
-.cursor { display: inline-block; width: 6px; height: 0.95em; background: var(--text-accent); margin-left: 1px; vertical-align: text-bottom; animation: blink 1.05s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+/* ── Global background ── */
+.page-wrapper { background: #fff; }
 
 /* ── HERO LOOP SECTION ── */
 .hero-loop {
@@ -107,8 +61,10 @@
 .hero-accent { color: var(--signal); }
 .hero-sub {
   font-family: 'Inter', sans-serif; font-size: 18px;
-  color: #8fa870; line-height: 1.6; max-width: 560px; margin-bottom: 56px;
+  color: #fff; line-height: 1.6; max-width: 560px; margin-bottom: 56px;
 }
+
+/* Loop diagram */
 .loop-diagram {
   background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08);
   border-radius: 10px; padding: 28px; overflow-x: auto;
@@ -120,24 +76,44 @@
   flex: 1; background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 6px; padding: 14px; text-align: center;
-  transition: border-color 0.3s, background 0.3s;
+  transition: border-color 0.4s, background 0.4s;
+  cursor: pointer;
 }
-.loop-stage:hover { border-color: var(--signal); background: rgba(98,185,26,0.08); }
+.loop-stage.active {
+  border-color: var(--signal);
+  background: rgba(98,185,26,0.1);
+}
 .loop-stage-video {
   width: 100%; height: 80px; background: rgba(0,0,0,0.3);
-  border-radius: 4px; margin-bottom: 10px; display: flex;
-  align-items: center; justify-content: center; font-size: 24px;
-  border: 1px dashed rgba(255,255,255,0.1); overflow: hidden;
+  border-radius: 4px; margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.06); overflow: hidden;
+  position: relative;
 }
-.loop-stage-video video { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.loop-stage-video video {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 4px;
+  opacity: 0.7; transition: opacity 0.4s;
+}
+.loop-stage.active .loop-stage-video video { opacity: 1; }
 .loop-stage-label {
   font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 3px;
+  transition: color 0.3s;
 }
+.loop-stage.active .loop-stage-label { color: var(--signal); }
 .loop-stage-desc { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.4; }
 .loop-arrow { display: flex; align-items: center; padding: 0 10px; color: var(--sage); font-size: 18px; flex: 0 0 auto; opacity: 0.5; }
 .loop-footer { text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 16px; }
 .loop-infinity { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+
+/* Progress dots for carousel */
+.loop-dots {
+  display: flex; justify-content: center; gap: 8px; margin-top: 20px;
+}
+.loop-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); transition: background 0.3s, transform 0.3s;
+}
+.loop-dot.active { background: var(--signal); transform: scale(1.4); }
 
 /* ── PIPELINE SECTION ── */
 .pipeline-section {
@@ -161,7 +137,6 @@
   font-family: 'Inter', sans-serif; font-size: 16px; color: var(--ink-muted);
   line-height: 1.6; max-width: 540px;
 }
-/* Progress rail */
 .pipeline-rail {
   position: relative; height: 2px; background: var(--rule);
   margin: 0 60px; overflow: hidden;
@@ -170,15 +145,12 @@
   position: absolute; top: 0; left: 0; height: 100%;
   width: 0; background: var(--signal); transition: width 0.1s;
 }
-/* Cards track */
 .pipeline-track {
-  display: flex; align-items: stretch; overflow-x: auto;
+  display: flex; align-items: stretch;
   border-bottom: 1px solid var(--rule);
-  -ms-overflow-style: none; scrollbar-width: none;
 }
-.pipeline-track::-webkit-scrollbar { display: none; }
 .model-card-p {
-  flex: 0 0 280px; border-right: 1px solid var(--rule);
+  flex: 1; min-width: 0; border-right: 1px solid var(--rule);
   padding: 40px 32px; background: var(--white); cursor: pointer;
   transition: background 0.15s;
 }
@@ -217,15 +189,16 @@
   display: flex; align-items: center; justify-content: center;
   color: #fff; font-size: 11px; flex: 0 0 auto;
 }
+
 /* Sort cap */
 .sort-cap-p {
-  flex: 0 0 220px; background: var(--pine); display: flex;
+  flex: 0 0 200px; background: var(--pine); display: flex;
   flex-direction: column; align-items: center; justify-content: center;
   padding: 40px 28px; gap: 14px; cursor: pointer;
 }
 .sort-cap-label {
   font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage);
+  letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
 }
 .sort-btn-p {
   background: var(--signal); color: var(--ink);
@@ -237,7 +210,7 @@
 .sort-btn-p:hover { background: var(--signal-deep); color: #fff; }
 .sort-cap-note {
   font-family: 'Inter', sans-serif; font-size: 11px;
-  color: var(--sage); text-align: center; line-height: 1.5;
+  color: #fff; text-align: center; line-height: 1.5; opacity: 0.7;
 }
 
 /* ── DASHBOARD SECTION ── */
@@ -271,7 +244,7 @@
   padding: 13px 28px; border-radius: 6px; cursor: pointer; transition: background 0.15s;
 }
 .dashboard-cta:hover { background: var(--signal-deep); color: #fff; }
-/* The panel */
+
 .flywheel-panel {
   background: var(--ink-soft); border-radius: 8px; padding: 24px;
   border: 1px solid rgba(255,255,255,0.06);
@@ -288,10 +261,14 @@
 .fp-sub { font-family: 'Inter', sans-serif; font-size: 11px; color: #5a6a45; margin-top: 2px; }
 .fp-badge {
   background: #1a3a0a; color: var(--signal); font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
   border: 1px solid var(--signal);
+  animation: live-pulse 2s ease-in-out infinite;
 }
-/* sparkline rows */
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(98,185,26,0); }
+  50% { box-shadow: 0 0 0 6px rgba(98,185,26,0.18), 0 0 14px 2px rgba(98,185,26,0.35); }
+}
 .fp-rows { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .fp-row {
   display: flex; align-items: center; gap: 12px;
@@ -359,18 +336,29 @@
   letter-spacing: -0.02em;
 }
 
-/* ── SECTION-5 (science) RESKIN ── */
-.section-5 { background: var(--pine); }
-.section-5 .heading-5 { color: #fff; font-family: 'Public Sans', sans-serif; font-weight: 600; }
-.section-5 .paragraph-3, .section-5 .paragraph-3-copy { color: #8fa870; }
-.section-5 .button { background: var(--signal); color: var(--ink); border-color: transparent; }
-.section-5 .button:hover { background: var(--signal-deep); color: #fff; }
+/* ── PRE-FOOTER LOTTIE SECTION ── */
+.lottie-cta-section {
+  background: var(--pine);
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+}
+.lottie-cta-inner {
+  max-width: 480px;
+  width: 100%;
+}
 
-/* ── IMAGE-WRAP HOVER ── */
-.image-wrap { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); cursor: pointer; }
-.image-wrap:hover { transform: translateY(-10px) scale(1.03); }
-.shine { transition: opacity 0.35s ease, transform 0.35s ease; }
-.image-wrap:hover .shine { opacity: 1 !important; transform: scale(1.3); }
+/* ── FOOTER BRAND COLORS ── */
+.footer-cta-wrap {
+  background: var(--pine) !important;
+}
+.footer-top-wrap {
+  background: var(--ink) !important;
+}
+.footer-bottom-wrap {
+  background: var(--ink) !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
 
 /* ── FOOTER CTA HOVER ── */
 .cta-link-hover-bg { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
