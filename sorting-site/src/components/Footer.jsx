@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="container">
           <div className="cta-text-wrapper">
             <a className="cta-text-wrap w-inline-block" href="#"
-              data-tally-open="xXRkXr" data-tally-layout="modal" data-tally-hide-title="1"
+              data-tally-open="xXRkXr" data-tally-overlay="1" data-tally-layout="modal" data-tally-hide-title="1"
               data-tally-align-left="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave">
               <div className="cta-text">Ready to s </div>
               <div className="cta-button-wrap">

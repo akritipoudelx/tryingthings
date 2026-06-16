@@ -33,7 +33,7 @@ export default function Navbar() {
               <div className="nav-right-flex">
                 <div className="nav-button-wrap">
                   <a className="dark-button w-variant-4c2497dc-c520-3049-f2ee-2eb4bb579d66 w-inline-block" href="#"
-                    data-tally-open="xXRkXr" data-tally-layout="modal" data-tally-hide-title="1"
+                    data-tally-open="xXRkXr" data-tally-overlay="1" data-tally-layout="modal" data-tally-hide-title="1"
                     data-tally-align-left="1" data-wf--primary-button--variant="blue"
                     data-tally-emoji-text="👋" data-tally-emoji-animation="wave">
                     <div className="primary-button-flex">

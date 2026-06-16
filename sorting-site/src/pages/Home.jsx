@@ -254,7 +254,7 @@ export default function Home() {
       >
         <div className="w-layout-blockcontainer container-3 w-container">
           <div className="div-block-2">
-            <div className="lottie-animation" data-w-id="5e8273b9-6257-e3d3-6318-a73c2e6a7176" data-animation-type="lottie" data-src="documents/Untitled-file-3.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="5.333333333333333" data-loading="lazy"></div>
+            <lottie-player src="/documents/Untitled-file-3.json" autoplay loop style={{width:"100%",height:"auto"}}></lottie-player>
           </div>
           <div className="div-block">
             <h1 className="heading-3">We <span className="text-span-2">sort</span> the <span className="text-span-3">unsortable</span>.</h1>
@@ -306,7 +306,12 @@ export default function Home() {
             <p className="paragraph-3-copy">Every edge case you bring makes the next model better. <br />The hard products — missing data, no GTIN, unlabeled hazmat — are exactly what we&#x27;re training on. <br />Bring your catalog&#x27;s worst cases. We want them.<br /></p>
           </div>
         </div>
-        <a href="https://tally.so/r/xXRkXr" target="_blank" className="button w-button"><strong className="bold-text">Talk to Us About Smarter-5</strong></a>
+        <a href="#" className="button w-button"
+          data-tally-open="xXRkXr" data-tally-overlay="1" data-tally-layout="modal"
+          data-tally-hide-title="1" data-tally-align-left="1"
+          data-tally-emoji-text="👋" data-tally-emoji-animation="wave">
+          <strong className="bold-text">Talk to Us About Smarter-5</strong>
+        </a>
       </section>
       <Footer />
     </div>
