@@ -875,27 +875,6 @@ model:              "gpt-5.5"`}</pre>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="ident-cta">
-        <div className="ident-container">
-          <h2 className="ident-cta-title">Ready to get sorted?</h2>
-          <p className="ident-cta-sub">See what Sordex does with your actual product data.</p>
-          <button
-            className="ident-cta-btn"
-            data-tally-open="xXRkXr"
-            data-tally-overlay="1"
-            data-tally-layout="modal"
-            data-tally-hide-title="1"
-            data-tally-align-left="1"
-            data-tally-emoji-text="👋"
-            data-tally-emoji-animation="wave"
-          >
-            Get Sorted
-            <span className="ident-cta-arrow">→</span>
-          </button>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );

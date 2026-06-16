@@ -824,27 +824,6 @@ export default function Platform() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="enrich-cta">
-        <div className="enrich-section-inner">
-          <div className="enrich-label" style={{textAlign:'center'}}>Ready?</div>
-          <h2>Get Sorted.</h2>
-          <p>Start classifying your catalog. No setup fee. No minimum SKU count.</p>
-          <button
-            className="enrich-btn"
-            data-tally-open="xXRkXr"
-            data-tally-overlay="1"
-            data-tally-layout="modal"
-            data-tally-hide-title="1"
-            data-tally-align-left="1"
-            data-tally-emoji-text="👋"
-            data-tally-emoji-animation="wave"
-          >
-            Get Sorted
-          </button>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );

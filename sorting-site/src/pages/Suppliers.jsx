@@ -880,28 +880,6 @@ export default function Suppliers() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="compute-cta-section">
-        <div className="compute-cta-inner">
-          <h2 className="compute-cta-title">Ready to see what your products are?</h2>
-          <p className="compute-cta-sub">
-            Tell us what you're working with. We'll show you what Sorting can do.
-          </p>
-          <button
-            className="compute-cta-btn"
-            data-tally-open="xXRkXr"
-            data-tally-overlay="1"
-            data-tally-layout="modal"
-            data-tally-hide-title="1"
-            data-tally-align-left="1"
-            data-tally-emoji-text="👋"
-            data-tally-emoji-animation="wave"
-          >
-            Get Sorted <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );

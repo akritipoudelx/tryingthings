@@ -32,57 +32,23 @@ export default function Home() {
         vid.play().catch(() => {});
       });
 
-      // True infinite looping carousel — clones cards so stage 1 flows after stage 5
-      const track = document.querySelector('.loop-carousel-track');
-      if (track && !track.dataset.initialized) {
-        track.dataset.initialized = '1';
-        const realStages = Array.from(track.querySelectorAll('.loop-stage'));
-        const dots = document.querySelectorAll('.loop-dot');
-        const N = realStages.length;
-        const CARD_W = 280, GAP = 16;
-
-        // Append clones so track = [0,1,2,3,4, 0c,1c,2c,3c,4c]
-        realStages.forEach(s => {
-          const clone = s.cloneNode(true);
-          clone.dataset.clone = '1';
-          track.appendChild(clone);
-        });
-        const allCards = Array.from(track.querySelectorAll('.loop-stage'));
-
+      // Simple highlight carousel — no movement, just border cycles
+      const stagesEl = document.querySelectorAll('.loop-stage');
+      const dots = document.querySelectorAll('.loop-dot');
+      if (stagesEl.length && !document.querySelector('.loop-stage[data-init]')) {
         let current = 0;
+        stagesEl[0].dataset.init = '1';
 
-        function getOffset(i) {
-          const wrapW = track.parentElement.clientWidth || 900;
-          return wrapW / 2 - (i * (CARD_W + GAP) + CARD_W / 2);
-        }
-
-        function goTo(i, instant) {
-          if (instant) {
-            track.style.transition = 'none';
-            track.style.transform = `translateX(${getOffset(i)}px)`;
-            track.offsetHeight;
-            track.style.transition = '';
-          } else {
-            track.style.transform = `translateX(${getOffset(i)}px)`;
-          }
-          allCards.forEach((c, idx) => c.classList.toggle('active', idx === i));
-          dots.forEach((d, idx) => d.classList.toggle('active', idx === (i % N)));
+        function activate(i) {
+          stagesEl.forEach((s, idx) => s.classList.toggle('active', idx === i));
+          dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
           current = i;
         }
 
-        goTo(0);
-
-        setInterval(() => {
-          const next = current + 1;
-          goTo(next);
-          if (next >= N) {
-            setTimeout(() => goTo(next - N, true), 660);
-          }
-        }, 2800);
-
-        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
-        realStages.forEach((s, i) => s.addEventListener('click', () => goTo(i)));
-        window.addEventListener('resize', () => goTo(current, true));
+        activate(0);
+        setInterval(() => activate((current + 1) % stagesEl.length), 2800);
+        dots.forEach((d, i) => d.addEventListener('click', () => activate(i)));
+        stagesEl.forEach((s, i) => s.addEventListener('click', () => activate(i)));
       }
 
       // Dashboard KPI counter tick-up

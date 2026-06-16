@@ -6,6 +6,7 @@ import Suppliers from './pages/Suppliers';
 import Company from './pages/Company';
 import NotFound from './pages/NotFound';
 import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/suppliers" element={<Suppliers />} />
         <Route path="/company" element={<Company />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

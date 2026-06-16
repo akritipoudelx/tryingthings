@@ -819,24 +819,6 @@ export default function Services() {
         </div>
       </div>
 
-      {/* ── CTA ── */}
-      <section className="ground-cta">
-        <h2>Ready to run a batch?</h2>
-        <p>Talk to us about getting your catalog into Ground.</p>
-        <button
-          className="ground-cta-btn"
-          data-tally-open="xXRkXr"
-          data-tally-overlay="1"
-          data-tally-layout="modal"
-          data-tally-hide-title="1"
-          data-tally-align-left="1"
-          data-tally-emoji-text="👋"
-          data-tally-emoji-animation="wave"
-        >
-          Get Sorted
-        </button>
-      </section>
-
       <Footer />
     </div>
   );

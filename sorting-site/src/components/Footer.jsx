@@ -60,14 +60,12 @@ export default function Footer() {
                     <h6 className="quick-links-title">Main Pages</h6>
                     <div className="footer-links-flex">
                       <div className="footer-links-row">
-                        <Link to="/platform" className="footer-link">Platform</Link>
+                        <Link to="/company" className="footer-link">Identify</Link>
+                        <Link to="/platform" className="footer-link">Enrich</Link>
                       </div>
                       <div className="footer-links-row">
-                        <Link to="/services" className="footer-link">Retailers</Link>
-                        <Link to="/suppliers" className="footer-link">Suppliers</Link>
-                      </div>
-                      <div className="footer-links-row">
-                        <Link to="/company" className="footer-link">Company</Link>
+                        <Link to="/services" className="footer-link">Ground</Link>
+                        <Link to="/suppliers" className="footer-link">Compute</Link>
                       </div>
                     </div>
                   </div>
@@ -76,7 +74,7 @@ export default function Footer() {
                     <div className="footer-links-flex">
                       <div className="footer-links-row">
                         <Link to="/terms" className="footer-link">Terms &amp; Conditions</Link>
-                        <a href="#" className="footer-link">Privacy Policy</a>
+                        <Link to="/privacy" className="footer-link">Privacy Policy</Link>
                       </div>
                     </div>
                   </div>
