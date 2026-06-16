@@ -192,43 +192,9 @@
   border-radius: 12px 12px 0 0;
 }
 
-/* ── Conveyor bridge between sections ── */
-.conveyor-bridge {
+/* ── Section-3 panel slide: sits on top of section-2 as it rises ── */
+.section-3 {
   position: relative;
-  width: 100%;
-  height: 80px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #f5f9e8 0%, #fff 100%);
-  display: flex;
-  align-items: center;
-}
-
-.conveyor-rail {
-  position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  height: 2px;
-  background: #d9f18c;
-  transform: translateY(-50%);
-}
-
-.conveyor-belt-line {
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  width: 60%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #8a9f52 30%, #bfd46a 70%, transparent);
-  transform: translateY(-50%);
-  border-radius: 2px;
-}
-
-/* ── Banner letter assembly: overflow clip for reveal ── */
-.single-banner-letter {
-  overflow: hidden;
-}
-
-/* ── After-banner content position fix ── */
-.after-banner-content-wrap {
-  left: auto !important;
+  z-index: 5;
+  will-change: transform;
 }
