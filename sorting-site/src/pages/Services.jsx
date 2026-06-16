@@ -350,7 +350,7 @@ const styles = `
     cursor: default;
   }
   .ground-select-mock::after {
-    content: '\25BE';
+    content: '▾';
     color: var(--ink-muted, #5C5950);
     font-size: 10px;
   }
