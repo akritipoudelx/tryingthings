@@ -1016,37 +1016,58 @@
       <div class="dashboard-right">
         <div class="dashboard-panel">
           <div class="dp-header">
-            <div class="dp-title">Smarter-4 · SORDEX</div>
-            <div class="dp-badge">● Live</div>
+            <div class="dp-title">[sorting] s4.1 flywheel</div>
+            <div class="dp-badge">30 cycles · latest 06-12T16:07</div>
           </div>
-          <!-- Chart bars (Charlie's dashboard inspired) -->
-          <div class="dp-chart-row">
-            <div class="dp-bar" style="height:35%"></div>
-            <div class="dp-bar" style="height:52%"></div>
-            <div class="dp-bar" style="height:44%"></div>
-            <div class="dp-bar hi" style="height:78%"></div>
-            <div class="dp-bar hi" style="height:91%"></div>
-            <div class="dp-bar hi" style="height:100%"></div>
-            <div class="dp-bar hi" style="height:95%"></div>
-            <div class="dp-bar hi" style="height:98%"></div>
+          <!-- Top KPI row — real data from Charlie's dashboard -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">
+            <div class="dp-metric">
+              <div class="dp-metric-val" style="font-size:18px">87.8%</div>
+              <div class="dp-metric-label">UN <span style="color:var(--signal)">+5.1</span></div>
+            </div>
+            <div class="dp-metric">
+              <div class="dp-metric-val" style="font-size:18px">96.3%</div>
+              <div class="dp-metric-label">Clean <span style="color:var(--signal)">→99</span></div>
+            </div>
+            <div class="dp-metric">
+              <div class="dp-metric-val" style="font-size:18px">$0.0024</div>
+              <div class="dp-metric-label">Per product</div>
+            </div>
           </div>
-          <div class="dp-metrics">
-            <div class="dp-metric">
-              <div class="dp-metric-val">2.1M</div>
-              <div class="dp-metric-label">Sorted today</div>
+          <!-- Parity sparklines — sampled from real attributes -->
+          <div style="font-family:Inter;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4a5e35;margin-bottom:8px">Parity — per attribute</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>iata_exception</span>
+              <span style="color:var(--signal);font-weight:600">100.0%</span>
             </div>
-            <div class="dp-metric">
-              <div class="dp-metric-val">↑4.2%</div>
-              <div class="dp-metric-label">Accuracy gain</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>technical_names</span>
+              <span style="color:var(--signal);font-weight:600">98.0%</span>
             </div>
-            <div class="dp-metric">
-              <div class="dp-metric-val">14</div>
-              <div class="dp-metric-label">New patterns</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>state_waste_codes</span>
+              <span style="color:var(--signal);font-weight:600">95.4%</span>
             </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>packing_group</span>
+              <span style="color:var(--signal);font-weight:600">94.2%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>hazard_class</span>
+              <span style="color:var(--signal);font-weight:600">89.1%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:Inter;font-size:11px;color:#6a7d55">
+              <span>un_number</span>
+              <span style="color:var(--signal);font-weight:600">87.8%</span>
+            </div>
+          </div>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid #2a3020;font-family:Inter;font-size:10px;color:#4a5e35">
+            10,131 exemplars · 2.46s avg · goldens 13 pinned
           </div>
         </div>
         <div class="anim-callout" style="margin-top:12px; background:#f0f8e8; border-left-color:var(--sage); color:#3a5010">
-          <strong style="color:var(--pine)">Note:</strong> This panel mirrors Charlie's dashboard layout. Will incorporate actual screenshot/design once shared. Numbers tick up as counters on scroll.
+          <strong style="color:var(--pine)">From Charlie's real dashboard.</strong> In the final build, metric counters tick up on scroll. Sparkline charts animate in. "Refresh to update" is wired to live data endpoint.
         </div>
       </div>
     </div>
