@@ -34,6 +34,8 @@
 
 /* ── Global background ── */
 .page-wrapper { background: #fff; }
+body { margin: 0; padding: 0; }
+.navbar { margin-top: 0 !important; top: 0 !important; }
 
 /* ── HERO LOOP SECTION ── */
 .hero-loop {
@@ -64,54 +66,60 @@
   color: #fff; line-height: 1.6; max-width: 560px; margin-bottom: 56px;
 }
 
-/* Loop diagram */
-.loop-diagram {
-  background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px; padding: 28px; overflow-x: auto;
+/* Loop carousel */
+.loop-carousel-wrap {
+  overflow: hidden;
+  padding: 10px 0 0;
+  position: relative;
 }
-.loop-stages {
-  display: flex; align-items: stretch; gap: 0; min-width: 700px;
+.loop-carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 .loop-stage {
-  flex: 1; background: rgba(255,255,255,0.04);
+  flex: 0 0 280px;
+  background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 6px; padding: 14px; text-align: center;
-  transition: border-color 0.4s, background 0.4s;
+  border-radius: 8px; padding: 16px; text-align: center;
+  transition: transform 0.5s, opacity 0.5s, border-color 0.4s, background 0.4s;
   cursor: pointer;
+  opacity: 0.45;
+  transform: scale(0.94);
 }
 .loop-stage.active {
   border-color: var(--signal);
   background: rgba(98,185,26,0.1);
+  opacity: 1;
+  transform: scale(1);
 }
 .loop-stage-video {
-  width: 100%; height: 80px; background: rgba(0,0,0,0.3);
-  border-radius: 4px; margin-bottom: 10px;
+  width: 100%; height: 140px; background: rgba(0,0,0,0.3);
+  border-radius: 6px; margin-bottom: 12px;
   border: 1px solid rgba(255,255,255,0.06); overflow: hidden;
-  position: relative;
 }
 .loop-stage-video video {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 4px;
-  opacity: 0.7; transition: opacity 0.4s;
+  width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
 }
-.loop-stage.active .loop-stage-video video { opacity: 1; }
 .loop-stage-label {
   font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 3px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 4px;
   transition: color 0.3s;
 }
 .loop-stage.active .loop-stage-label { color: var(--signal); }
-.loop-stage-desc { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.4; }
-.loop-arrow { display: flex; align-items: center; padding: 0 10px; color: var(--sage); font-size: 18px; flex: 0 0 auto; opacity: 0.5; }
-.loop-footer { text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 16px; }
+.loop-stage-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+.loop-footer { text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 24px; }
 .loop-infinity { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
 
-/* Progress dots for carousel */
+/* Progress dots */
 .loop-dots {
   display: flex; justify-content: center; gap: 8px; margin-top: 20px;
 }
 .loop-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: rgba(255,255,255,0.2); transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
 }
 .loop-dot.active { background: var(--signal); transform: scale(1.4); }
 
@@ -338,27 +346,39 @@
 
 /* ── PRE-FOOTER LOTTIE SECTION ── */
 .lottie-cta-section {
-  background: var(--pine);
-  padding: 60px;
+  background: #fff;
+  padding: 40px 60px 0;
   display: flex;
   justify-content: center;
 }
 .lottie-cta-inner {
-  max-width: 480px;
+  max-width: 400px;
   width: 100%;
 }
 
 /* ── FOOTER BRAND COLORS ── */
 .footer-cta-wrap {
-  background: var(--pine) !important;
+  background: #fff !important;
+  border-top: none !important;
 }
 .footer-top-wrap {
-  background: var(--ink) !important;
+  background: #fff !important;
 }
 .footer-bottom-wrap {
-  background: var(--ink) !important;
-  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  background: #fff !important;
+  border-top: 1px solid var(--rule) !important;
 }
+.footer .cta-text { color: var(--ink) !important; }
+.footer .cta-text-wrap { color: var(--ink) !important; }
+
+/* Social link buttons — green outline so they're visible on white */
+.cta-social-link-wrap {
+  border: 1px solid var(--signal) !important;
+  border-radius: 6px;
+}
+.cta-social-link-wrap .cta-social-link-text { color: var(--ink) !important; }
+.cta-social-link-wrap:hover .cta-social-link-text { color: var(--ink) !important; }
+.cta-link-hover-bg { background: var(--signal) !important; }
 
 /* ── FOOTER CTA HOVER ── */
 .cta-link-hover-bg { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }

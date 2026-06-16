@@ -32,24 +32,39 @@ export default function Home() {
         vid.play().catch(() => {});
       });
 
-      // Carousel — cycle through loop stages
+      // Horizontal sliding carousel
+      const track = document.querySelector('.loop-carousel-track');
       const stages = document.querySelectorAll('.loop-stage');
       const dots = document.querySelectorAll('.loop-dot');
-      let current = 0;
-      function activate(i) {
-        stages.forEach((s, idx) => s.classList.toggle('active', idx === i));
-        dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-        current = i;
+      if (track && stages.length) {
+        const CARD_W = 280, GAP = 16;
+        let current = 0;
+
+        function getOffset(i) {
+          const wrapW = track.parentElement.clientWidth || 900;
+          const centerX = wrapW / 2;
+          const cardCenter = i * (CARD_W + GAP) + CARD_W / 2;
+          return centerX - cardCenter;
+        }
+
+        function activate(i) {
+          stages.forEach((s, idx) => s.classList.toggle('active', idx === i));
+          dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+          track.style.transform = `translateX(${getOffset(i)}px)`;
+          current = i;
+        }
+
+        activate(0);
+
+        const carouselInterval = setInterval(() => {
+          activate((current + 1) % stages.length);
+        }, 2800);
+
+        stages.forEach((s, i) => s.addEventListener('click', () => activate(i)));
+        dots.forEach((d, i) => d.addEventListener('click', () => activate(i)));
+
+        window.addEventListener('resize', () => activate(current));
       }
-      activate(0);
-      const carouselInterval = setInterval(() => {
-        activate((current + 1) % stages.length);
-      }, 2800);
-      // Allow click to jump
-      stages.forEach((s, i) => s.addEventListener('click', () => {
-        clearInterval(carouselInterval);
-        activate(i);
-      }));
 
       // Dashboard KPI counter tick-up
       function animateCounter(el, target, decimals, suffix, duration) {
@@ -103,22 +118,6 @@ export default function Home() {
       gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 1, ease: 'power2.out', delay: 0.6 });
       gsap.from('.loop-diagram', { opacity: 0, y: 40, duration: 1.2, ease: 'power2.out', delay: 0.9 });
 
-      // Section-3 heading build
-      if (SplitText) {
-        const h3 = document.querySelector('.section-3 .heading-3');
-        if (h3) {
-          const split = new SplitText(h3, { type: 'words' });
-          gsap.from(split.words, {
-            opacity: 0, y: 24, stagger: 0.06, ease: 'power3.out',
-            scrollTrigger: { trigger: '.section-3', start: 'top 65%', end: 'top 20%', scrub: 0.6 },
-          });
-        }
-      }
-      gsap.from('.section-3 .paragraph', {
-        opacity: 0, y: 20, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: '.section-3 .paragraph', start: 'top 80%' },
-      });
-
       // Pipeline cards
       gsap.from('.model-card-p', {
         opacity: 0, x: 30, stagger: 0.1, duration: 0.7, ease: 'power2.out',
@@ -160,7 +159,8 @@ export default function Home() {
           </p>
 
           <div className="loop-diagram">
-            <div className="loop-stages">
+            <div className="loop-carousel-wrap">
+            <div className="loop-carousel-track">
               <div className="loop-stage">
                 <div className="loop-stage-video">
                   <video id="ls0" autoPlay muted loop playsInline preload="auto"></video>
@@ -168,7 +168,6 @@ export default function Home() {
                 <div className="loop-stage-label">Intake</div>
                 <div className="loop-stage-desc">Raw catalog data, no structure</div>
               </div>
-              <div className="loop-arrow">→</div>
               <div className="loop-stage">
                 <div className="loop-stage-video">
                   <video id="ls1" autoPlay muted loop playsInline preload="auto"></video>
@@ -176,7 +175,6 @@ export default function Home() {
                 <div className="loop-stage-label">Scan</div>
                 <div className="loop-stage-desc">Barcode, image, description</div>
               </div>
-              <div className="loop-arrow">→</div>
               <div className="loop-stage">
                 <div className="loop-stage-video">
                   <video id="ls2" autoPlay muted loop playsInline preload="auto"></video>
@@ -184,7 +182,6 @@ export default function Home() {
                 <div className="loop-stage-label">Sort</div>
                 <div className="loop-stage-desc">Classify, route, enrich</div>
               </div>
-              <div className="loop-arrow">→</div>
               <div className="loop-stage">
                 <div className="loop-stage-video">
                   <video id="ls3" autoPlay muted loop playsInline preload="auto"></video>
@@ -192,7 +189,6 @@ export default function Home() {
                 <div className="loop-stage-label">Compute</div>
                 <div className="loop-stage-desc">Regulatory decisions at scale</div>
               </div>
-              <div className="loop-arrow">→</div>
               <div className="loop-stage">
                 <div className="loop-stage-video">
                   <video id="ls4" autoPlay muted loop playsInline preload="auto"></video>
@@ -200,6 +196,7 @@ export default function Home() {
                 <div className="loop-stage-label">Sell</div>
                 <div className="loop-stage-desc">Shelf-ready, compliant products</div>
               </div>
+            </div>
             </div>
             <div className="loop-footer">
               <span className="loop-infinity">∞ &nbsp; The confusion never stops. Neither do we.</span>
@@ -216,17 +213,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECTION 2: We sort the unsortable (no lottie here) ── */}
-      <section className="section-3">
-        <div className="w-layout-blockcontainer container-3 w-container">
-          <div className="div-block">
-            <h1 className="heading-3">We <span className="text-span-2">sort</span> the <span className="text-span-3">unsortable</span>.</h1>
-            <p className="paragraph">Other models stop where the hard problems start. <strong>Sorting is the only engine purpose-trained on retail regulatory data</strong>.<br /><br /><strong>No other model covers the full regulatory spectrum from a single API call.</strong> Whether it be EPR or state waste codes — we resolve it all in one response, so you can ditch the five separate vendor relationships.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── SECTION 3: Model Pipeline (S1 → S4) ── */}
+      {/* ── SECTION 2: Model Pipeline (S1 → S4) ── */}
       <section className="pipeline-section">
         <div className="pipeline-header">
           <p className="s-eyebrow">The progression</p>
