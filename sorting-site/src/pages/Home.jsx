@@ -47,17 +47,30 @@ export default function Home() {
           return centerX - cardCenter;
         }
 
-        function activate(i) {
+        function activate(i, instant) {
+          if (instant) {
+            track.style.transition = 'none';
+            track.style.transform = `translateX(${getOffset(i)}px)`;
+            track.offsetHeight; // force reflow
+            track.style.transition = '';
+          } else {
+            track.style.transform = `translateX(${getOffset(i)}px)`;
+          }
           stages.forEach((s, idx) => s.classList.toggle('active', idx === i));
           dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-          track.style.transform = `translateX(${getOffset(i)}px)`;
           current = i;
         }
 
         activate(0);
 
         const carouselInterval = setInterval(() => {
-          activate((current + 1) % stages.length);
+          const next = (current + 1) % stages.length;
+          // When wrapping from last back to first, snap instantly then continue
+          if (next === 0 && current === stages.length - 1) {
+            activate(0, true);
+          } else {
+            activate(next);
+          }
         }, 2800);
 
         stages.forEach((s, i) => s.addEventListener('click', () => activate(i)));
@@ -236,7 +249,7 @@ export default function Home() {
               <div className="mc-meter-head"><span>Cost</span><span>Low</span></div>
               <div className="mc-meter-track"><div className="mc-meter-fill cost" style={{width:'20%'}}></div></div>
             </div>
-            <a href="/company" className="mc-link">Learn more <span className="mc-arrow">→</span></a>
+            <a href="/company" className="mc-link">Learn more <span className="mc-arrow"></span></a>
           </div>
           <div className="model-card-p">
             <div className="mc-number">S2</div>
@@ -250,7 +263,7 @@ export default function Home() {
               <div className="mc-meter-head"><span>Cost</span><span>Low–Med</span></div>
               <div className="mc-meter-track"><div className="mc-meter-fill cost" style={{width:'35%'}}></div></div>
             </div>
-            <a href="/platform" className="mc-link">Learn more <span className="mc-arrow">→</span></a>
+            <a href="/platform" className="mc-link">Learn more <span className="mc-arrow"></span></a>
           </div>
           <div className="model-card-p">
             <div className="mc-number">S3</div>
@@ -264,7 +277,7 @@ export default function Home() {
               <div className="mc-meter-head"><span>Cost</span><span>Med</span></div>
               <div className="mc-meter-track"><div className="mc-meter-fill cost" style={{width:'55%'}}></div></div>
             </div>
-            <a href="/services" className="mc-link">Learn more <span className="mc-arrow">→</span></a>
+            <a href="/services" className="mc-link">Learn more <span className="mc-arrow"></span></a>
           </div>
           <div className="model-card-p featured">
             <div className="mc-number">S4</div>
@@ -278,7 +291,7 @@ export default function Home() {
               <div className="mc-meter-head"><span>Cost</span><span>Lowest</span></div>
               <div className="mc-meter-track"><div className="mc-meter-fill cost" style={{width:'8%'}}></div></div>
             </div>
-            <a href="/suppliers" className="mc-link">Learn more <span className="mc-arrow">→</span></a>
+            <a href="/suppliers" className="mc-link">Learn more <span className="mc-arrow"></span></a>
           </div>
           <div className="sort-cap-p">
             <div className="sort-cap-label">Ready to run?</div>

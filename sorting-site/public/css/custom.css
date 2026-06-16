@@ -34,8 +34,10 @@
 
 /* ── Global background ── */
 .page-wrapper { background: #fff; }
-body { margin: 0; padding: 0; }
-.navbar { margin-top: 0 !important; top: 0 !important; }
+html, body { margin: 0; padding: 0; }
+#root, .page-wrapper { margin-top: 0; padding-top: 0; }
+.w-nav { margin-bottom: 0 !important; }
+.hero-loop { margin-top: 0 !important; }
 
 /* ── HERO LOOP SECTION ── */
 .hero-loop {
@@ -194,8 +196,27 @@ body { margin: 0; padding: 0; }
 }
 .mc-arrow {
   width: 22px; height: 22px; background: var(--pine); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 11px; flex: 0 0 auto;
+  position: relative; overflow: hidden; flex: 0 0 auto;
+}
+.mc-arrow::before,
+.mc-arrow::after {
+  content: '↗';
+  position: absolute;
+  color: #fff; font-size: 11px; font-weight: 700;
+  line-height: 1;
+}
+.mc-arrow::before {
+  animation: mc-arrow-fly 1.5s ease-in-out infinite;
+}
+.mc-arrow::after {
+  animation: mc-arrow-fly 1.5s ease-in-out infinite 0.75s;
+}
+@keyframes mc-arrow-fly {
+  0%   { transform: translate(-180%, 120%); opacity: 0; }
+  18%  { opacity: 1; }
+  50%  { transform: translate(-50%, -50%); opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translate(60%, -180%); opacity: 0; }
 }
 
 /* Sort cap */
@@ -350,6 +371,7 @@ body { margin: 0; padding: 0; }
   padding: 40px 60px 0;
   display: flex;
   justify-content: center;
+  border: none !important;
 }
 .lottie-cta-inner {
   max-width: 400px;
@@ -357,28 +379,32 @@ body { margin: 0; padding: 0; }
 }
 
 /* ── FOOTER BRAND COLORS ── */
-.footer-cta-wrap {
+.footer,
+.footer-cta-wrap,
+.footer-top-wrap,
+.footer-bottom-wrap {
   background: #fff !important;
   border-top: none !important;
 }
-.footer-top-wrap {
-  background: #fff !important;
-}
 .footer-bottom-wrap {
-  background: #fff !important;
   border-top: 1px solid var(--rule) !important;
 }
-.footer .cta-text { color: var(--ink) !important; }
+.footer .cta-text,
 .footer .cta-text-wrap { color: var(--ink) !important; }
 
-/* Social link buttons — green outline so they're visible on white */
+/* Social link buttons — green outline, always 20px radius */
 .cta-social-link-wrap {
   border: 1px solid var(--signal) !important;
-  border-radius: 6px;
+  border-radius: 20px !important;
+  overflow: hidden;
 }
 .cta-social-link-wrap .cta-social-link-text { color: var(--ink) !important; }
-.cta-social-link-wrap:hover .cta-social-link-text { color: var(--ink) !important; }
-.cta-link-hover-bg { background: var(--signal) !important; }
+.cta-social-link-wrap:hover .cta-social-link-text { color: #fff !important; }
+/* Hover background: sage instead of lime green */
+.cta-link-hover-bg {
+  background: var(--sage) !important;
+  border-radius: 20px !important;
+}
 
 /* ── FOOTER CTA HOVER ── */
 .cta-link-hover-bg { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
