@@ -247,11 +247,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section
-        data-w-id="0959151a-b22d-e46c-893c-f6e75a4d9fe2"
-        style={{WebkitTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', MozTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', msTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', transform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', opacity:0, filter:'blur(5px)'}}
-        className="section-3"
-      >
+      <section data-w-id="0959151a-b22d-e46c-893c-f6e75a4d9fe2" className="section-3">
         <div className="w-layout-blockcontainer container-3 w-container">
           <div className="div-block-2">
             <lottie-player src="/documents/Untitled-file-3.json" autoplay loop style={{width:"100%",height:"auto"}}></lottie-player>
@@ -262,11 +258,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section
-        data-w-id="be8beff6-c78f-6b11-9ee1-cf71b40c1d22"
-        style={{WebkitTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', MozTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', msTransform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', transform:'translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)', opacity:0, filter:'blur(5px)'}}
-        className="section-5"
-      >
+      <section data-w-id="be8beff6-c78f-6b11-9ee1-cf71b40c1d22" className="section-5">
         <div className="w-layout-blockcontainer container-4 w-container">
           <div className="div-block-5">
             <h1 className="heading-5">The Science Behind Every Sort</h1>
