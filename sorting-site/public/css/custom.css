@@ -71,7 +71,6 @@
   background: var(--term-bg);
   border: 1px solid #2a3d50;
   box-shadow: 0 18px 45px -22px rgba(0,0,0,0.7);
-  overflow: hidden;
 }
 
 .tile video {
@@ -81,6 +80,8 @@
   object-fit: cover;
   pointer-events: none;
   background: var(--term-bg-2);
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
 }
 
 .tile .label {
@@ -99,6 +100,7 @@
   background: var(--term-bg);
   overflow: hidden;
   padding: 10px 12px;
+  border-radius: 12px 12px 0 0;
 }
 
 .term-body {
@@ -176,4 +178,57 @@
 .cta-text-wrap:hover .cta-button-wrap {
   transform: translate(0, -50%) scale(1.12);
   box-shadow: 0 8px 30px -8px rgba(138, 159, 82, 0.6);
+}
+
+/* ── Stage-pill fix: float above card ── */
+.tile {
+  overflow: visible;
+}
+.tile video {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.term-view {
+  border-radius: 12px 12px 0 0;
+}
+
+/* ── Conveyor bridge between sections ── */
+.conveyor-bridge {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f5f9e8 0%, #fff 100%);
+  display: flex;
+  align-items: center;
+}
+
+.conveyor-rail {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 2px;
+  background: #d9f18c;
+  transform: translateY(-50%);
+}
+
+.conveyor-belt-line {
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #8a9f52 30%, #bfd46a 70%, transparent);
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* ── Banner letter assembly: overflow clip for reveal ── */
+.single-banner-letter {
+  overflow: hidden;
+}
+
+/* ── After-banner content position fix ── */
+.after-banner-content-wrap {
+  left: auto !important;
 }

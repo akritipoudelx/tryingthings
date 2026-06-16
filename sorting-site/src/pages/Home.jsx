@@ -198,10 +198,170 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const gsap = window.gsap;
+      const ScrollTrigger = window.ScrollTrigger;
+      if (!gsap || !ScrollTrigger) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ── 1. Letter assembly: stagger from below (conveyor deposits letters) ──
+      gsap.from('.single-banner-letter .text-block, .single-banner-letter .after-banner-wrapper', {
+        yPercent: 110,
+        duration: 1.1,
+        ease: 'power4.out',
+        stagger: 0.12,
+        clearProps: 'transform',
+      });
+
+      // ── 2. After-banner content fades in ──
+      gsap.from('.after-banner-content-wrap', {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        delay: 0.6,
+        ease: 'power3.out',
+      });
+
+      // ── 3. Conveyor belt line sweeps from left to right ──
+      gsap.to('.conveyor-belt-line', {
+        x: '250%',
+        duration: 2,
+        repeat: -1,
+        ease: 'none',
+      });
+
+      // ── 4. Scroll-linked: section-2 rises as belt delivers it ──
+      gsap.from('.section-2', {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.section-2',
+          start: 'top 85%',
+          end: 'top 40%',
+          scrub: 0.8,
+        },
+      });
+
+      // ── 5. Scroll-linked: conveyor bridge shrinks/morphs as section-2 rises ──
+      gsap.to('.conveyor-bridge', {
+        scaleY: 0,
+        transformOrigin: 'bottom center',
+        scrollTrigger: {
+          trigger: '.section-2',
+          start: 'top 70%',
+          end: 'top 20%',
+          scrub: 1,
+        },
+      });
+
+      // ── 6. Scroll-linked: section-3 ("We sort the unsortable") entrance ──
+      gsap.from('.section-3 .div-block-2', {
+        x: -80,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.section-3',
+          start: 'top 75%',
+        },
+      });
+
+      gsap.from('.section-3 .div-block', {
+        x: 80,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.section-3',
+          start: 'top 75%',
+        },
+      });
+
+      return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="page-wrapper">
       <Navbar />
-      <section className="banner-section"></section>
+      <section className="banner-section">
+  <div className="banner-vh-wrap">
+    <div className="banner-sticky-wrap">
+      <div className="banner-wrapper">
+        <div className="banner-letters-wrap">
+          <div className="banner-letters-row">
+            <div className="banner-letters-flex">
+              <div className="single-banner-letter _01" id="bl-s">
+                <div className="text-block">S</div>
+              </div>
+              <div className="single-banner-letter _02" id="bl-o">
+                <div className="after-banner-wrapper">
+                  <div className="after-banner-inner">
+                    <div className="after-banner-wrap">
+                      <div className="container navbar-container is-after-container">
+                        <div className="after-banner-content-wrap">
+                          <h2 className="after-banner-title">The Intelligence Inside Every Product Decision</h2>
+                          <p className="after-banner-details">Every product in your store was classified, checked, and routed before it arrived. Sorting makes all of it happen—automatically, invisibly, in under a second.</p>
+                          <a className="dark-button w-inline-block" href="#"
+                            data-tally-open="xXRkXr" data-tally-overlay="1" data-tally-layout="modal"
+                            data-tally-hide-title="1" data-tally-align-left="1"
+                            data-tally-emoji-text="👋" data-tally-emoji-animation="wave">
+                            <div className="primary-button-flex">
+                              <div className="primary-button-text-wrap-copy">
+                                <div className="primary-button-text">Get Sorted</div>
+                                <div className="primary-button-text-hover">Get Sorted</div>
+                              </div>
+                              <div className="primary-button-arrow-wrapper">
+                                <div className="primary-button-arrow-wrap">
+                                  <img src="/images/Untitled-design---2026-04-16T122225.997.png" loading="lazy" alt="" className="primary-button-arrow" />
+                                  <img src="/images/Untitled-design---2026-04-16T122225.997.png" loading="lazy" alt="" className="primary-button-arrow-hover" />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="primary-button-hover-bg"></div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="banner-bg-wrap">
+                      <img src="/images/Untitled-design---2026-04-26T144950.424.png" loading="lazy" width="1440" height="800" alt="" className="banner-bg-image" />
+                      <div className="banner-bg-shape"></div>
+                    </div>
+                  </div>
+                  <div className="banner-letter-o"></div>
+                </div>
+              </div>
+              <div className="single-banner-letter _05" id="bl-r"><div className="text-block">R</div></div>
+              <div className="single-banner-letter _05" id="bl-t"><div className="text-block">T</div></div>
+              <div className="single-banner-letter _05" id="bl-e"><div className="text-block">E</div></div>
+              <div className="single-banner-letter _05" id="bl-d"><div className="text-block">D</div></div>
+            </div>
+          </div>
+        </div>
+        <div className="container banner-container">
+          <div className="banner-content-wrapper"></div>
+          <div className="banner-borders-wrapper">
+            <div className="banner-borders-flex">
+              <div className="banner-border-line"></div>
+              <div className="banner-border-line"></div>
+              <div className="banner-border-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+      <div className="conveyor-bridge" aria-hidden="true">
+  <div className="conveyor-rail"></div>
+  <div className="conveyor-belt-line"></div>
+</div>
       <section className="section-2">
         <div className="w-layout-blockcontainer container-2 w-container"></div>
         <div className="code-embed w-embed w-script">
