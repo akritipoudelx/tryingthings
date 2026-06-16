@@ -32,51 +32,57 @@ export default function Home() {
         vid.play().catch(() => {});
       });
 
-      // Horizontal sliding carousel
+      // True infinite looping carousel — clones cards so stage 1 flows after stage 5
       const track = document.querySelector('.loop-carousel-track');
-      const stages = document.querySelectorAll('.loop-stage');
+      const realStages = Array.from(document.querySelectorAll('.loop-stage'));
       const dots = document.querySelectorAll('.loop-dot');
-      if (track && stages.length) {
+      if (track && realStages.length) {
+        const N = realStages.length;
         const CARD_W = 280, GAP = 16;
+
+        // Append clones so track = [0,1,2,3,4, 0c,1c,2c,3c,4c]
+        realStages.forEach(s => {
+          const clone = s.cloneNode(true);
+          clone.dataset.clone = '1';
+          track.appendChild(clone);
+        });
+        const allCards = Array.from(track.querySelectorAll('.loop-stage'));
+
         let current = 0;
 
         function getOffset(i) {
           const wrapW = track.parentElement.clientWidth || 900;
-          const centerX = wrapW / 2;
-          const cardCenter = i * (CARD_W + GAP) + CARD_W / 2;
-          return centerX - cardCenter;
+          return wrapW / 2 - (i * (CARD_W + GAP) + CARD_W / 2);
         }
 
-        function activate(i, instant) {
+        function goTo(i, instant) {
           if (instant) {
             track.style.transition = 'none';
             track.style.transform = `translateX(${getOffset(i)}px)`;
-            track.offsetHeight; // force reflow
+            track.offsetHeight;
             track.style.transition = '';
           } else {
             track.style.transform = `translateX(${getOffset(i)}px)`;
           }
-          stages.forEach((s, idx) => s.classList.toggle('active', idx === i));
-          dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+          allCards.forEach((c, idx) => c.classList.toggle('active', idx === i));
+          dots.forEach((d, idx) => d.classList.toggle('active', idx === (i % N)));
           current = i;
         }
 
-        activate(0);
+        goTo(0);
 
-        const carouselInterval = setInterval(() => {
-          const next = (current + 1) % stages.length;
-          // When wrapping from last back to first, snap instantly then continue
-          if (next === 0 && current === stages.length - 1) {
-            activate(0, true);
-          } else {
-            activate(next);
+        setInterval(() => {
+          const next = current + 1;
+          goTo(next);
+          // After animating to a clone, instantly reset to real equivalent
+          if (next >= N) {
+            setTimeout(() => goTo(next - N, true), 660);
           }
         }, 2800);
 
-        stages.forEach((s, i) => s.addEventListener('click', () => activate(i)));
-        dots.forEach((d, i) => d.addEventListener('click', () => activate(i)));
-
-        window.addEventListener('resize', () => activate(current));
+        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+        realStages.forEach((s, i) => s.addEventListener('click', () => goTo(i)));
+        window.addEventListener('resize', () => goTo(current, true));
       }
 
       // Dashboard KPI counter tick-up

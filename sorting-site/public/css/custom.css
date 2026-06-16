@@ -35,9 +35,9 @@
 /* ── Global background ── */
 .page-wrapper { background: #fff; }
 html, body { margin: 0; padding: 0; }
-#root, .page-wrapper { margin-top: 0; padding-top: 0; }
-.w-nav { margin-bottom: 0 !important; }
-.hero-loop { margin-top: 0 !important; }
+/* Remove the default padding-top on the navbar and banner gap */
+.navbar { padding-top: 0 !important; }
+.banner-section { display: none !important; }
 
 /* ── HERO LOOP SECTION ── */
 .hero-loop {
@@ -392,10 +392,10 @@ html, body { margin: 0; padding: 0; }
 .footer .cta-text,
 .footer .cta-text-wrap { color: var(--ink) !important; }
 
-/* Social link buttons — green outline, always 20px radius */
+/* Social link buttons — green outline, always 30px radius */
 .cta-social-link-wrap {
   border: 1px solid var(--signal) !important;
-  border-radius: 20px !important;
+  border-radius: 30px !important;
   overflow: hidden;
 }
 .cta-social-link-wrap .cta-social-link-text { color: var(--ink) !important; }
@@ -403,7 +403,7 @@ html, body { margin: 0; padding: 0; }
 /* Hover background: sage instead of lime green */
 .cta-link-hover-bg {
   background: var(--sage) !important;
-  border-radius: 20px !important;
+  border-radius: 30px !important;
 }
 
 /* ── FOOTER CTA HOVER ── */
